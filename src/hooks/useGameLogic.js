@@ -28,4 +28,11 @@ export const useGameLogic = () => {
     },
     [currentIndex, currentQuestion, selectedAnswer, totalQuestions],
   );
+
+  const resetGame = useCallback(() => {
+    setCurrentIndex(0);
+    setScore(0);
+    setGameOver(false);
+    setSelectedAnswer(null);
+  }, []);
 };
