@@ -35,4 +35,15 @@ export const useGameLogic = () => {
     setGameOver(false);
     setSelectedAnswer(null);
   }, []);
+
+  return {
+    currentQuestion,
+    currentIndex,
+    totalQuestions,
+    score,
+    gameOver,
+    selectedAnswer,
+    handleAnswer,
+    resetGame,
+  };
 };
