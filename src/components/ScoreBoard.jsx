@@ -7,7 +7,7 @@ const ScoreBoard = ({ score, currentIndex, totalQuestions }) => {
         display: "flex",
         justifyContent: "space-between",
         padding: "1rem 2rem",
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#f5f5f54f",
         borderBottom: "1px solid #ddd",
       }}
     >

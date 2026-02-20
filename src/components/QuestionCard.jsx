@@ -24,7 +24,7 @@ const QuestionCard = ({ question, onAnswer, selectedAnswer }) => {
             disabled={selectedAnswer !== null}
             style={{
               padding: "0.75rem 1rem",
-              border: "2px solid #ddd",
+              border: "2px solid #5a82cd",
               borderRadius: "8px",
               cursor: selectedAnswer ? "default" : "pointer",
               textAlign: "left",
