@@ -1,7 +1,8 @@
 import React from "react";
+import Timer from "./Timer";
 
-const ScoreBoard = ({ score, currentIndex, totalQuestions }) => {
-  return (
+// Vérifie bien cette ligne précise :
+const ScoreBoard = ({ score, currentIndex, totalQuestions, selectedAnswer, onTimeUp }) => {  return (
     <div
       style={{
         display: "flex",
@@ -14,6 +15,12 @@ const ScoreBoard = ({ score, currentIndex, totalQuestions }) => {
       <span>
         Question {currentIndex + 1} / {totalQuestions}
       </span>
+      <Timer 
+        initialTime={10} // Tu peux changer la durée ici (ex: 10 secondes)
+        resetKey={currentIndex} 
+        isPaused={selectedAnswer !== null} 
+        onTimeUp={onTimeUp} 
+      />
       <span>
         Score : <strong>{score}</strong>
       </span>
