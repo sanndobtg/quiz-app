@@ -30,11 +30,13 @@ function App() {
         />
       ) : (
         <>
-          <ScoreBoard
-            score={score}
-            currentIndex={currentIndex}
-            totalQuestions={totalQuestions}
-          />
+        <ScoreBoard
+  score={score}
+  currentIndex={currentIndex}
+  totalQuestions={totalQuestions}
+  selectedAnswer={selectedAnswer} 
+  onTimeUp={() => handleAnswer("Temps écoulé")} 
+/>
           <QuestionCard
             question={currentQuestion}
             onAnswer={handleAnswer}
