@@ -4,9 +4,9 @@ const ResultsScreen = ({ score, totalQuestions, onRestart }) => {
   const percentage = Math.round((score / totalQuestions) * 100);
 
   const getMessage = () => {
-    if (percentage >= 80) return "🎉 Excellent ! Tu es un champion du quiz !";
-    if (percentage >= 50) return "👍 Pas mal ! Tu peux faire encore mieux !";
-    return "😅 Continue à t'entraîner, tu y arriveras !";
+    if (percentage >= 80) return "Excellent ! Tu es un champion du quiz !";
+    if (percentage >= 50) return "Pas mal ! Tu peux faire encore mieux !";
+    return "Continue à t'entraîner, tu y arriveras !";
   };
 
   return (
