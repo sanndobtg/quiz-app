@@ -5,7 +5,7 @@ import ScoreBoard from "./components/ScoreBoard";
 import ResultsScreen from "./components/ResultsScreen";
 
 function App() {
- const {
+  const {
     currentQuestion,
     currentIndex,
     totalQuestions,
@@ -13,7 +13,9 @@ function App() {
     gameOver,
     selectedAnswer,
     handleAnswer,
+    handleTimeUp,
     resetGame,
+    isTransitioning,
   } = useGameLogic();
 
   return (
@@ -21,7 +23,6 @@ function App() {
       <h1 style={{ textAlign: "center", padding: "1.5rem", color: "#4f46e5" }}>
         Quiz App
       </h1>
-
       {gameOver ? (
         <ResultsScreen
           score={score}
@@ -30,13 +31,14 @@ function App() {
         />
       ) : (
         <>
-        <ScoreBoard
-  score={score}
-  currentIndex={currentIndex}
-  totalQuestions={totalQuestions}
-  selectedAnswer={selectedAnswer} 
-  onTimeUp={() => handleAnswer("Temps écoulé")} 
-/>
+          <ScoreBoard
+            score={score}
+            currentIndex={currentIndex}
+            totalQuestions={totalQuestions}
+            selectedAnswer={selectedAnswer}
+            isTransitioning={isTransitioning}
+            onTimeUp={handleTimeUp}
+          />
           <QuestionCard
             question={currentQuestion}
             onAnswer={handleAnswer}

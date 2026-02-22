@@ -1,36 +1,42 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Timer = ({ initialTime, onTimeUp, resetKey, isPaused }) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
+  const hasFired = useRef(false);
+  const onTimeUpRef = useRef(onTimeUp);
 
-  // Se déclenche à chaque fois que "resetKey" (l'index de la question) change
+  // Met à jour la ref à chaque render sans causer de re-déclenchement
+  useEffect(() => {
+    onTimeUpRef.current = onTimeUp;
+  });
+
+  // Reset à chaque nouvelle question
   useEffect(() => {
     setTimeLeft(initialTime);
+    hasFired.current = false;
   }, [resetKey, initialTime]);
 
   // Gère le compte à rebours
   useEffect(() => {
-    // Si le timer est en pause ou à 0, on arrête de compter
     if (isPaused || timeLeft === 0) {
-      if (timeLeft === 0 && !isPaused) {
-        onTimeUp(); // Déclenche l'action de fin de temps
+      if (timeLeft === 0 && !isPaused && !hasFired.current) {
+        hasFired.current = true;
+        onTimeUpRef.current(); // ← on appelle via la ref, pas via la prop
       }
       return;
     }
 
-    // Enlève 1 seconde toutes les 1000 millisecondes
     const timerId = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
-    // Nettoyage pour éviter les bugs de mémoire
     return () => clearInterval(timerId);
-  }, [timeLeft, isPaused, onTimeUp]);
+  }, [timeLeft, isPaused]); // ← onTimeUp retiré des dépendances
 
   return (
-    <div style={{ 
-      fontWeight: "bold", 
-      color: timeLeft <= 3 ? "#f44336" : "inherit" // Devient rouge s'il reste 3s ou moins
+    <div style={{
+      fontWeight: "bold",
+      color: timeLeft <= 3 ? "#f44336" : "inherit"
     }}>
       ⏱️ {timeLeft}s
     </div>
